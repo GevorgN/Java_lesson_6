@@ -5,8 +5,15 @@ public class Student {
     private String lastName;
     private int year;
     private char gender;
-    private double weight;
+    private double mark;
 
+    public Student(String[] studentList) {
+        setFirstName(studentList[0]);
+        setLastName(studentList[1]);
+        setYear(studentList[2]);
+        setGender(studentList[3]);
+        setMark(studentList[4]);
+    }
 
     public String getFirstName() {
         return firstName;
@@ -40,11 +47,11 @@ public class Student {
         this.gender = gender.charAt(0);
     }
 
-    public double getWeight() {
-        return weight;
+    public double getMark() {
+        return mark;
     }
 
-    public void setWeight(String weight) {
-        this.weight = Double.parseDouble(weight);
+    public void setMark(String mark) {
+        this.mark = Double.parseDouble(mark);
     }
 }

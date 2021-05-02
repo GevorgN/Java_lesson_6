@@ -5,41 +5,132 @@ import student.Student;
 
 public class StudentService {
 
-    public static Student createStudent(String[] studentList) {
-        Student student = new Student();
-        student.setFirstName(studentList[0]);
-        student.setLastName(studentList[1]);
-        student.setYear(studentList[2]);
-        student.setGender(studentList[3]);
-        student.setWeight(studentList[4]);
-        return student;
-    }
 
     private static void printInfo(Student student) {
-        System.out.println("\nStudent first name is " + student.getFirstName() + " last name is " + student.getLastName());
+        System.out.println(student.getFirstName() + " " + student.getLastName());
         System.out.printf("%s was born in %d\n", student.getFirstName(), student.getYear());
         System.out.printf("%s is a %s\n", student.getFirstName(), student.getGender() == 'm' ? "male" : "female");
-        System.out.printf("%s weight is %s\n", student.getFirstName(), student.getWeight());
+        System.out.printf("%s mark is %s\n", student.getFirstName(), student.getMark());
+        System.out.println();
     }
 
-    public static void createStudentFromList(String[] read) {
-        String[] studentList1 = read[0].split(",");
-        Student student1 = StudentService.createStudent(studentList1);
-        String[] studentList2 = read[1].split(",");
-        Student student2 = StudentService.createStudent(studentList2);
-        String[] studentList3 = read[2].split(",");
-        Student student3 = StudentService.createStudent(studentList3);
-        String[] studentList4 = read[3].split(",");
-        Student student4 = StudentService.createStudent(studentList4);
-        String[] studentList5 = read[4].split(",");
-        Student student5 = StudentService.createStudent(studentList5);
-        String[] studentList6 = read[5].split(",");
-        Student student6 = StudentService.createStudent(studentList6);
-        StudentService.printInfo(student1);
-        StudentService.printInfo(student2);
-        StudentService.printInfo(student3);
-        StudentService.printInfo(student4);
-        StudentService.printInfo(student5);
-        StudentService.printInfo(student6);
+
+    public static void printFullNames(Student student1) {
+        System.out.println(student1.getFirstName() + " " + student1.getLastName());
+        System.out.println();
+    }
+
+    public static void printFullNamesWithMarks(Student student) {
+        System.out.println(student.getFirstName() + " " + student.getLastName() + " - " + student.getMark());
+        System.out.println();
+    }
+
+    public static void printFullNamesWithYears(Student student) {
+        System.out.println(student.getFirstName() + " " + student.getLastName() + " - " + student.getYear());
+        System.out.println();
+    }
+
+    public static void printFullNames(Student student1, Student student2) {
+        System.out.println(student1.getFirstName() + " " + student1.getLastName());
+        System.out.println(student2.getFirstName() + " " + student2.getLastName());
+        System.out.println();
+    }
+
+    public static void printFullNames(Student student1, Student student2, Student student3) {
+        System.out.println(student1.getFirstName() + " " + student1.getLastName());
+        System.out.println(student2.getFirstName() + " " + student2.getLastName());
+        System.out.println(student3.getFirstName() + " " + student3.getLastName());
+        System.out.println();
+    }
+
+    public static void printAllMale(Student[] students) {
+        for (Student x : students) {
+            if (x.getGender() == 'm') {
+                StudentService.printFullNames(x);
+            }
+        }
+    }
+
+    public static void femaleGreaterMark(Student[] students) {
+        for (Student x : students) {
+            if (x.getGender() == 'f' && x.getMark() > 50.4) {
+                StudentService.printFullNames(x);
+            }
+        }
+    }
+
+    public static void minimalMark(Student[] students) {
+        Student minimal = students[0].getMark() < students[1].getMark() ? students[0] : students[1];
+        if (minimal.getMark() > students[2].getMark()) {
+            minimal = students[2];
+        }
+        printInfo(minimal);
+    }
+
+    public static void printBiggestMaleInfo(Student[] students) {
+        int count = 0;
+        boolean flag = true;
+        while (flag) {
+            flag = false;
+            for (int i = 0; i < students.length - 1 - count; i++) {
+                if (students[i].getYear() > students[i + 1].getYear()) {
+                    Student tmp = students[i];
+                    students[i] = students[i + 1];
+                    students[i + 1] = tmp;
+                    flag = true;
+                }
+            }
+            count++;
+        }
+        for (int i = 0; i < students.length; i++) {
+            if (students[i].getGender() == 'm') {
+                printInfo(students[0]);
+            }
+        }
+    }
+
+
+    public static void printStudentsSortedByMark(Student[] students) {
+        int count = 0;
+        boolean flag = true;
+        while (flag) {
+            flag = false;
+            for (int i = 0; i < students.length - 1 - count; i++) {
+                if (students[i].getMark() > students[i + 1].getMark()) {
+                    Student tmp = students[i];
+                    students[i] = students[i + 1];
+                    students[i + 1] = tmp;
+                    flag = true;
+                }
+            }
+            count++;
+        }
+        for (int i = 0; i < students.length; i++) {
+            printFullNamesWithMarks(students[i]);
+        }
+    }
+
+    public static void printFemaleStudentsSortedByYear(Student[] students) {
+        for (Student x : students) {
+            if (x.getGender() == 'f') {
+                int count = 0;
+                boolean flag = true;
+                while (flag) {
+                    flag = false;
+                    for (int i = 0; i < students.length - 1 - count; i++) {
+                        if (students[i].getYear() > students[i + 1].getYear()) {
+                            Student tmp = students[i];
+                            students[i] = students[i + 1];
+                            students[i + 1] = tmp;
+                            flag = true;
+                        }
+                    }
+                    count++;
+                }
+                for (int i = 0; i < students.length; i++) {
+                    printFullNamesWithYears(students[i]);
+                }
+            }
+        }
     }
 }
