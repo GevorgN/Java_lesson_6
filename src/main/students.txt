@@ -1,0 +1,6 @@
+Hayk,Arabyan,1998,m,80.5
+Vahe,Gevorgyan,1997,m,75.6
+Lusine,Vardanyan,1999,f,50.3
+Iren,Galstyan,2000,f,49.5
+Karen,Adamyan,1998,m,82.4
+Kristina,Arakelyan,2001,f,45.6
